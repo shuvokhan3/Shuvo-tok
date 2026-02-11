@@ -11,6 +11,7 @@ class VideoController extends Controller
         $userId = auth()->id();
         
         $videos = \App\Models\Video::with(['user:id,name,avatar_path', 'comments.user:id,name'])
+            ->where('status', 'approved')
             ->withCount('likes as total_reactions')
             ->latest()
             ->paginate(10);
@@ -53,6 +54,7 @@ class VideoController extends Controller
         $request->user()->videos()->create([
             'file_path' => $path,
             'description' => $request->description,
+            'status' => 'pending',
         ]);
 
         return redirect()->route('dashboard');
