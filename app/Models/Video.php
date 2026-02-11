@@ -12,6 +12,10 @@ class Video extends Model
         'thumbnail_path',
         'description',
         'views_count',
+        'status',
+        'reviewed_by',
+        'reviewed_at',
+        'rejection_reason',
     ];
 
     public function user()
